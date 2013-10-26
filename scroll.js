@@ -35,11 +35,11 @@ $.extend(Scroll.prototype, {
             mousedown: function(e){
                 var startScrollPosition = e.pageY-parseInt($(this).css('top') || 0);
                 $(document).mousemove($.proxy(function(e){
-                    $(this).css('top', e.pageY-startScrollPosition).trigger('checkAllItems');
+                    $(this).css('top', e.pageY-startScrollPosition).trigger('checkAll');
                 },this))
                 return false;
             },
-            'checkAllItems': $.proxy(function(){
+            'checkAll': $.proxy(function(){
                 this.update();
             },this)
         });
@@ -50,9 +50,9 @@ $.extend(Scroll.prototype, {
 
         this.wrapperText.on('mousewheel MozMousePixelScroll', $.proxy(function(e){
             if (e.type === 'mousewheel') {
-                this.scroll.css('top',e.originalEvent.wheelDelta >= 0? '-=20': '+=20').trigger('checkAllItems');
+                this.scroll.css('top',e.originalEvent.wheelDelta >= 0? '-=20': '+=20').trigger('checkAll');
             } else {
-                this.scroll.css('top',e.originalEvent.detail <= 0? '-=20': '+=20').trigger('checkAllItems');
+                this.scroll.css('top',e.originalEvent.detail <= 0? '-=20': '+=20').trigger('checkAll');
             };
             e.preventDefault();
         },this));
