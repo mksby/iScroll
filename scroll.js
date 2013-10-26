@@ -29,7 +29,7 @@ $.extend(Scroll.prototype, {
         });
         var val = (this.fullText.outerHeight(true)-this.wrapperText.outerHeight(true))/(this.areaScroll.outerHeight(true)-this.scroll.outerHeight(true))*parseInt(this.scroll.css('top'));
         this.fullText.css('top', -val);
-    ,
+    },
     events: function(){
         this.scroll.on({
             mousedown: function(e){
