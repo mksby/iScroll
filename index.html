@@ -1,0 +1,279 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style>
+		.wrap, .wrap-h {width: 300px; height: 350px; border: 1px solid; position: relative; display: inline-block; }
+		.wrap-text {overflow: hidden; height: 100%; }
+		.text {position: relative; }
+		.wrap-h .iscroll__text {height: 100%; width: 300%; }
+		.wrap-h .wrap-scroll {top: auto; left: 10px; width: auto; height: 10px; }
+		.wrap-h .scroll {top: auto; left: 0; height: 100%; }
+		.wrap-scroll {position: absolute; top: 10px; right: 10px; bottom: 10px; width: 10px; }
+		.scroll {background: red; position: relative; top: 0; z-index: 1; }
+	</style>
+</head>
+<body>
+
+<div class="wrap">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+
+<div class="wrap-h">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam<span class="box">100</span> dignissimos autem adipisci magni officia  ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+<div class="wrap">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+
+<div class="wrap-h">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam<span class="box">100</span> dignissimos autem adipisci magni officia  ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+<div class="wrap">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+
+<div class="wrap-h">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam<span class="box">100</span> dignissimos autem adipisci magni officia  ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+<div class="wrap">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+
+<div class="wrap-h">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam<span class="box">100</span> dignissimos autem adipisci magni officia  ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+<div class="wrap">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+
+<div class="wrap-h">
+	<div class="wrap-scroll iscroll__bt">
+		<div class="scroll iscroll__bt_drag"></div>
+	</div>
+	<div class="wrap-text text iscroll__text_min">
+		<div class="text iscroll__text">
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam<span class="box">100</span> dignissimos autem adipisci magni officia  ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+			<div class="point">100</div>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, ipsa, a, quidem, eveniet ipsum odio ex ratione voluptatem expedita eligendi maiores perspiciatis sint natus officiis doloremque modi ducimus omnis velit.</div>
+			<div>Accusamus, dicta, tempora doloremque omnis porro suscipit delectus dolorum vel odit adipisci consequuntur praesentium error facere soluta reiciendis alias laudantium eveniet minus aperiam et rem dolores possimus vitae animi iste.</div>
+			<div>Nobis, at, quam, laborum alias sint quos dolore magni eveniet porro officiis sed sequi unde quis dicta perferendis ut quaerat suscipit nesciunt ipsum maxime obcaecati ipsam officia voluptates commodi maiores.</div>
+			<div>Tempore, nostrum, unde, cupiditate consequuntur amet impedit molestiae quam dignissimos autem adipisci magni officia ipsum quos expedita odit qui voluptate sapiente accusantium beatae natus aliquid a laborum ea vel quisquam.</div>
+			<div>Ipsa, ab, eaque, vero nobis cumque id temporibus perspiciatis esse veniam hic eligendi aspernatur odit consectetur quisquam necessitatibus. Quis, consequatur suscipit veritatis doloribus dicta voluptatem distinctio nostrum odit in atque.</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="http://yandex.st/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/iscroll.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>
