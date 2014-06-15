@@ -3,6 +3,8 @@
 ;(function(window, document) {
     'use strict';
 
+    var directionMove;
+
     var getType = function(element, nameType) {
         var type = Object.prototype.toString.call(element).slice(8, -1);
         return {
@@ -33,13 +35,17 @@
             var newTopText = diffTextBoxes / diffScrollBoxes * newScrollTop;
 
             $text.css('top', -newTopText);
-            callback.call($wrap, {
-                pixel: newScrollTop,
-                percent: newScrollTop / maxScrollTop * 100
-            }, {
-                pixel: 0 - newTopText,
-                percent: newTopText / diffTextBoxes * 100
-            });
+
+            if (callback) {
+                callback.call($wrap, {
+                    pixel: newScrollTop,
+                    percent: newScrollTop / maxScrollTop * 100
+                }, {
+                    pixel: 0 - newTopText,
+                    percent: newTopText / diffTextBoxes * 100
+                }, directionMove);
+            }
+            
         },
         horizontal: function($wrap, $text, $minText, $scrollArea, $scroll, callback) {
             var originalScrollLeft = parseInt($scroll.css('left')),
@@ -87,30 +93,32 @@
                 $scrollArea = $('.' + (getType(params, 'Object').isValid && params.scrollArea || 'iscroll__bt'), this),
                 $scroll = $('.' + (getType(params, 'Object').isValid && params.scroll || 'iscroll__bt_drag'), this),
                 direction = getType(params, 'Object').isValid && params.direction || 'vertical',
-                arrayElements = [$wrap, $text, $minText, $scrollArea, $scroll, _callback];
+                arrayElements = [$wrap, $text, $minText, $scrollArea, $scroll, _callback]
 
-            var setHeightScroll = {
-                vertical: function() {
-                    var heightScroll = $minText.outerHeight(true) / $text.outerHeight(true) * $scrollArea.outerHeight(true);
-                    $scroll.css('height', heightScroll)
-                },
-                horizontal: function() {
-                    var widthScroll = $minText.outerWidth(true) / $text.outerWidth(true) * $scrollArea.outerWidth(true);
-                    $scroll.css('width', widthScroll)
+            var setHeightScroll = (function() {
+                var MINSIZE = 20;
+
+                return {
+                    vertical: function() {
+                        var heightScroll = $minText.outerHeight(true) / $text.outerHeight(true) * $scrollArea.outerHeight(true);
+                        if (heightScroll < MINSIZE) {
+                            heightScroll = MINSIZE
+                        };
+                        $scroll.css('height', heightScroll)
+                    },
+                    horizontal: function() {
+                        var widthScroll = $minText.outerWidth(true) / $text.outerWidth(true) * $scrollArea.outerWidth(true);
+                        if (widthScroll < MINSIZE) {
+                            widthScroll = MINSIZE
+                        };
+                        $scroll.css('width', widthScroll)
+                    }
                 }
-            };
+            }());
 
             var setEvents = {
-                vertical: function() {
-                    $wrap.on('mousewheel MozMousePixelScroll', function(event) {
-                        var step = ($scrollArea.height() - $scroll.height()) / ($text.outerHeight(true) / $minText.outerHeight(true) * 10);
-
-                        if (event.type === 'mousewheel') {
-                            $scroll.css('top', event.originalEvent.wheelDelta >= 0 ? '-=' + step : '+=' + step);
-                        } else {
-                            $scroll.css('top', event.originalEvent.detail <= 0 ? '-=' + step : '+=' + step);
-                        };
-
+                go: {
+                    vertical: function() {
                         var beforeHeightScroll = $scroll.outerHeight(true);
 
                         moveText[direction].apply($wrap, arrayElements);
@@ -120,6 +128,48 @@
                             var newPosScroll = Math.abs(parseInt($text.css('top'))) / (($text.outerHeight(true) - $minText.outerHeight(true)) / ($scrollArea.outerHeight(true) - $scroll.outerHeight(true)));
                             $scroll.css('top', newPosScroll);
                         }
+                    },
+                    horizontal: function() {
+                        var beforeWidthScroll = $scroll.outerWidth(true);
+
+                        moveText[direction].apply($wrap, arrayElements);
+                        setHeightScroll[direction]();
+
+                        if (beforeWidthScroll - $scroll.outerWidth(true) !== 0) {
+                            var newPosScroll = Math.abs(parseInt($text.css('left'))) / (($text.outerWidth(true) - $minText.outerWidth(true)) / ($scrollArea.outerWidth(true) - $scroll.outerWidth(true)));
+                            $scroll.css('left', newPosScroll);
+                        }
+                    }
+                },
+                vertical: function() {
+                    $wrap.on('mousewheel MozMousePixelScroll', function(event) {
+                        var step = ($scrollArea.height() - $scroll.height()) / ($text.outerHeight(true) / $minText.outerHeight(true) * 10);
+
+                        if (step < 1) {
+                            step = 1
+                        };
+
+                        if (event.type === 'mousewheel') {     
+                                               
+                            if (event.originalEvent.wheelDelta >= 0) {
+                                directionMove = 'up'
+                            } else {
+                                directionMove = 'down'
+                            }
+
+                            $scroll.css('top', event.originalEvent.wheelDelta >= 0 ? '-=' + step : '+=' + step);
+                        } else {
+
+                            if (event.originalEvent.detail <= 0) {
+                                directionMove = 'up'
+                            } else {
+                                directionMove = 'down'
+                            }
+
+                            $scroll.css('top', event.originalEvent.detail <= 0 ? '-=' + step : '+=' + step);
+                        };
+
+                        setEvents.go[direction]();
 
                         event.preventDefault();
                     });
@@ -128,8 +178,14 @@
                         var originalScrollTop = event.pageY - parseInt($(this).css('top') || 0);
 
                         $(document.body).on('mousemove.iScroll', function(event) {
+                            if ((event.pageY - originalScrollTop) - parseInt($scroll.css('top')) > 0) {
+                                directionMove = 'down'
+                            } else {
+                                directionMove = 'up'
+                            };
+
                             $scroll.css('top', event.pageY - originalScrollTop);
-                            moveText[direction].apply($wrap, arrayElements);
+                            setEvents.go[direction]();
                         });
 
                         return false;
@@ -142,21 +198,29 @@
                     $wrap.on('mousewheel MozMousePixelScroll', function(event) {
                         var step = ($scrollArea.width() - $scroll.width()) / ($text.outerWidth(true) / $minText.outerWidth(true) * 10);
 
+                        if (step < 1) {
+                            step = 1
+                        };
+
                         if (event.type === 'mousewheel') {
+                            if (event.originalEvent.wheelDelta >= 0) {
+                                directionMove = 'right'
+                            } else {
+                                directionMove = 'left'
+                            };
+
                             $scroll.css('left', event.originalEvent.wheelDelta >= 0 ? '-=' + step : '+=' + step);
                         } else {
+                            if (event.originalEvent.detail <= 0) {
+                                directionMove = 'right'
+                            } else {
+                                directionMove = 'left'
+                            };
+
                             $scroll.css('left', event.originalEvent.detail <= 0 ? '-=' + step : '+=' + step);
                         };
 
-                        var beforeWidthScroll = $scroll.outerWidth(true);
-
-                        moveText[direction].apply($wrap, arrayElements);
-                        setHeightScroll[direction]();
-
-                        if (beforeWidthScroll - $scroll.outerWidth(true) !== 0) {
-                            var newPosScroll = Math.abs(parseInt($text.css('left'))) / (($text.outerWidth(true) - $minText.outerWidth(true)) / ($scrollArea.outerWidth(true) - $scroll.outerWidth(true)));
-                            $scroll.css('left', newPosScroll);
-                        }
+                        setEvents.go[direction]();
 
                         event.preventDefault();
                     });
@@ -165,8 +229,14 @@
                         var originalScrollLeft = event.pageX - parseInt($(this).css('left') || 0);
 
                         $(document.body).on('mousemove.iScroll', function(event) {
+                            if ((event.pageX - originalScrollLeft) - parseInt($scroll.css('left')) > 0) {
+                                directionMove = 'right'
+                            } else {
+                                directionMove = 'left'
+                            }
+
                             $scroll.css('left', event.pageX - originalScrollLeft);
-                            moveText[direction].apply($wrap, arrayElements);
+                            setEvents.go[direction]();
                         });
 
                         return false;
@@ -200,7 +270,19 @@
 
             return $(this);
         },
-        iScrollTop: function(selector, callback) {
+        iScrollTop: function(_selector, _needAnimate, _callback) {
+
+            var selector = _selector,
+                needAnimate = true, 
+                callback;
+
+            if (getType(_needAnimate, 'Boolean').isValid) {
+                needAnimate = _needAnimate
+            } else if (getType(_needAnimate, 'Function').isValid) {
+                callback = _needAnimate
+            } else if (getType(_callback, 'Function').isValid) {
+                callback = _callback
+            };
 
             if ($(this).length > 1) {
                 return $(this).each(function(index, element) {
@@ -225,7 +307,7 @@
                 $minText = $wrap.data('$minText'),
                 $scrollArea = $wrap.data('$scrollArea'),
                 $scroll = $wrap.data('$scroll'),
-                arrayElements = [$text, $minText, $scrollArea, $scroll],
+                arrayElements = [$wrap, $text, $minText, $scrollArea, $scroll],
                 newTopPosition, speedAnimate, ANIMATESTEP = 4;
 
             if (direction === 'vertical') {
@@ -263,18 +345,29 @@
                 speedAnimate = Math.abs(newScrollPosition - parseInt($scroll.css('left'))) * ANIMATESTEP;
             };
 
-            $scroll.animate(newCSS, {
-                duration: speedAnimate,
-                progress: function() {
-                    moveText[direction].apply($wrap, arrayElements)
-                },
-                done: function() {
-                    callback && callback.call($wrap, {
-                        done: true,
-                        description: 'End animate to ' + selector + ' element.'
-                    });
-                }
-            });
+            if (needAnimate) {
+                $scroll.animate(newCSS, {
+                    duration: speedAnimate,
+                    progress: function() {
+                        moveText[direction].apply($wrap, arrayElements)
+                    },
+                    done: function() {
+                        callback && callback.call($wrap, {
+                            done: true,
+                            description: 'End animate to ' + selector + ' element.'
+                        });
+                    }
+                });
+            } else {
+                $scroll.css(newCSS);
+                moveText[direction].apply($wrap, arrayElements)
+                callback && callback.call($wrap, {
+                    done: true,
+                    description: 'End move to ' + selector + ' element.'
+                });
+            }
+
+            
 
             return $(this);
         }
