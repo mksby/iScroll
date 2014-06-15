@@ -1,15 +1,25 @@
 /* iScroll plugin */
 
 ;(function(window, document) {
+    'use strict';
+
+    var getType = function(element, nameType) {
+        var type = Object.prototype.toString.call(element).slice(8, -1);
+        return {
+            isValid: type === nameType,
+            getActual: type
+        }
+    };
+
     var moveText = {
-        vertical: function($text, $minText, $scrollArea, $scroll) {
+        vertical: function($wrap, $text, $minText, $scrollArea, $scroll, callback) {
             var originalScrollTop = parseInt($scroll.css('top')),
                 maxScrollTop = $scrollArea.outerHeight(true) - $scroll.outerHeight(true),
                 newScrollTop;
 
-            if(originalScrollTop < 0) {
+            if (originalScrollTop < 0) {
                 newScrollTop = 0;
-            } else if(originalScrollTop > maxScrollTop) {
+            } else if (originalScrollTop > maxScrollTop) {
                 newScrollTop = maxScrollTop;
             } else {
                 newScrollTop = originalScrollTop;
@@ -21,16 +31,24 @@
                 diffScrollBoxes = $scrollArea.outerHeight(true) - $scroll.outerHeight(true);
 
             var newTopText = diffTextBoxes / diffScrollBoxes * newScrollTop;
+
             $text.css('top', -newTopText);
+            callback.call($wrap, {
+                pixel: newScrollTop,
+                percent: newScrollTop / maxScrollTop * 100
+            }, {
+                pixel: 0 - newTopText,
+                percent: newTopText / diffTextBoxes * 100
+            });
         },
-        horizontal: function($text, $minText, $scrollArea, $scroll) {
+        horizontal: function($wrap, $text, $minText, $scrollArea, $scroll, callback) {
             var originalScrollLeft = parseInt($scroll.css('left')),
                 maxScrollLeft = $scrollArea.outerWidth(true) - $scroll.outerWidth(true),
                 newScrollLeft;
 
-            if(originalScrollLeft < 0) {
+            if (originalScrollLeft < 0) {
                 newScrollLeft = 0;
-            } else if(originalScrollLeft > maxScrollLeft) {
+            } else if (originalScrollLeft > maxScrollLeft) {
                 newScrollLeft = maxScrollLeft;
             } else {
                 newScrollLeft = originalScrollLeft;
@@ -43,26 +61,33 @@
 
             var newLeftText = diffTextBoxes / diffScrollBoxes * newScrollLeft;
             $text.css('left', -newLeftText);
+            callback.call($wrap, {
+                pixel: newScrollLeft,
+                percent: newScrollLeft / maxScrollLeft * 100
+            }, {
+                pixel: 0 - newLeftText,
+                percent: newLeftText / diffTextBoxes * 100
+            });
         }
     };
 
     $.extend($.fn, {
-        iScroll: function(params) {
-            'use strict';
-
+        iScroll: function(params, callback) {
             if ($(this).length > 1) {
                 return $(this).each(function(index, element) {
                     $.fn.iScroll.call($(element), params)
                 });
-            }
+            };
+
+            var _callback = getType(params, 'Function').isValid && params || getType(callback, 'Function').isValid && callback || $.noop();
 
             var $wrap = $(this),
-                $text = $('.' + (Boolean(params) && params.text || 'iscroll__text'), this),
-                $minText = $('.' + (Boolean(params) && params.minText || 'iscroll__text_min'), this),
-                $scrollArea = $('.' + (Boolean(params) && params.scrollArea || 'iscroll__bt'), this),
-                $scroll = $('.' + (Boolean(params) && params.scroll || 'iscroll__bt_drag'), this),
-                direction = Boolean(params) && params.direction || 'vertical',
-                arrayElements = [$text, $minText, $scrollArea, $scroll];
+                $text = $('.' + (getType(params, 'Object').isValid && params.text || 'iscroll__text'), this),
+                $minText = $('.' + (getType(params, 'Object').isValid && params.minText || 'iscroll__text_min'), this),
+                $scrollArea = $('.' + (getType(params, 'Object').isValid && params.scrollArea || 'iscroll__bt'), this),
+                $scroll = $('.' + (getType(params, 'Object').isValid && params.scroll || 'iscroll__bt_drag'), this),
+                direction = getType(params, 'Object').isValid && params.direction || 'vertical',
+                arrayElements = [$wrap, $text, $minText, $scrollArea, $scroll, _callback];
 
             var setHeightScroll = {
                 vertical: function() {
@@ -78,14 +103,24 @@
             var setEvents = {
                 vertical: function() {
                     $wrap.on('mousewheel MozMousePixelScroll', function(event) {
-                        var step = ($scrollArea.height() - $scroll.height()) / 30;
+                        var step = ($scrollArea.height() - $scroll.height()) / ($text.outerHeight(true) / $minText.outerHeight(true) * 10);
 
                         if (event.type === 'mousewheel') {
-                            $scroll.css('top', event.originalEvent.wheelDelta >= 0 ? '-=' + step: '+=' + step);
+                            $scroll.css('top', event.originalEvent.wheelDelta >= 0 ? '-=' + step : '+=' + step);
                         } else {
-                            $scroll.css('top', event.originalEvent.detail <= 0 ? '-=' + step: '+=' + step);
+                            $scroll.css('top', event.originalEvent.detail <= 0 ? '-=' + step : '+=' + step);
                         };
+
+                        var beforeHeightScroll = $scroll.outerHeight(true);
+
                         moveText[direction].apply($wrap, arrayElements);
+                        setHeightScroll[direction]();
+
+                        if (beforeHeightScroll - $scroll.outerHeight(true) !== 0) {
+                            var newPosScroll = Math.abs(parseInt($text.css('top'))) / (($text.outerHeight(true) - $minText.outerHeight(true)) / ($scrollArea.outerHeight(true) - $scroll.outerHeight(true)));
+                            $scroll.css('top', newPosScroll);
+                        }
+
                         event.preventDefault();
                     });
 
@@ -105,14 +140,24 @@
                 horizontal: function() {
 
                     $wrap.on('mousewheel MozMousePixelScroll', function(event) {
-                        var step = ($scrollArea.width() - $scroll.width()) / 30;
+                        var step = ($scrollArea.width() - $scroll.width()) / ($text.outerWidth(true) / $minText.outerWidth(true) * 10);
 
                         if (event.type === 'mousewheel') {
-                            $scroll.css('left', event.originalEvent.wheelDelta >= 0 ? '-=' + step: '+=' + step);
+                            $scroll.css('left', event.originalEvent.wheelDelta >= 0 ? '-=' + step : '+=' + step);
                         } else {
-                            $scroll.css('left', event.originalEvent.detail <= 0 ? '-=' + step: '+=' + step);
+                            $scroll.css('left', event.originalEvent.detail <= 0 ? '-=' + step : '+=' + step);
                         };
+
+                        var beforeWidthScroll = $scroll.outerWidth(true);
+
                         moveText[direction].apply($wrap, arrayElements);
+                        setHeightScroll[direction]();
+
+                        if (beforeWidthScroll - $scroll.outerWidth(true) !== 0) {
+                            var newPosScroll = Math.abs(parseInt($text.css('left'))) / (($text.outerWidth(true) - $minText.outerWidth(true)) / ($scrollArea.outerWidth(true) - $scroll.outerWidth(true)));
+                            $scroll.css('left', newPosScroll);
+                        }
+
                         event.preventDefault();
                     });
 
@@ -156,7 +201,6 @@
             return $(this);
         },
         iScrollTop: function(selector, callback) {
-            'use strict';
 
             if ($(this).length > 1) {
                 return $(this).each(function(index, element) {
@@ -195,12 +239,14 @@
 
                 var ratioTextBoxes = newTopPosition / $text.height(),
                     newScrollPosition = $scrollArea.height() * ratioTextBoxes,
-                    newCSS = {top: newScrollPosition};
+                    newCSS = {
+                        top: newScrollPosition
+                    };
 
                 speedAnimate = Math.abs(newScrollPosition - parseInt($scroll.css('top'))) * ANIMATESTEP;
 
             } else if (direction === 'horizontal') {
-                
+
                 if (isPseudoSelector) {
                     if (selector === ':start') newTopPosition = 0;
                     if (selector === ':end') newTopPosition = $text.width() - $minText.width();
@@ -210,7 +256,9 @@
 
                 var ratioTextBoxes = newTopPosition / $text.width(),
                     newScrollPosition = $scrollArea.width() * ratioTextBoxes,
-                    newCSS = {left: newScrollPosition};
+                    newCSS = {
+                        left: newScrollPosition
+                    };
 
                 speedAnimate = Math.abs(newScrollPosition - parseInt($scroll.css('left'))) * ANIMATESTEP;
             };
@@ -223,7 +271,7 @@
                 done: function() {
                     callback && callback.call($wrap, {
                         done: true,
-                        description: 'End animate to '+ selector +' element.'
+                        description: 'End animate to ' + selector + ' element.'
                     });
                 }
             });
