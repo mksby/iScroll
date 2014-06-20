@@ -3,7 +3,35 @@
 ;(function(window, document) {
     'use strict';
 
-    var directionMove;
+    ;(function() {
+        var vendors = ['webkit', 'moz', 'o', 'ms'],
+            lastTime = 0;
+
+        for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+            window.cancelAnimationFrame =
+                window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+        }
+
+        if (!window.requestAnimationFrame)
+            window.requestAnimationFrame = function(callback, element) {
+                var currTime = new Date().getTime();
+                var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                var id = window.setTimeout(function() {
+                        callback(currTime + timeToCall);
+                    },
+                    timeToCall);
+                lastTime = currTime + timeToCall;
+                return id;
+            };
+
+        if (!window.cancelAnimationFrame)
+            window.cancelAnimationFrame = function(id) {
+                clearTimeout(id);
+            };
+    }());
+
+    var directionMove, typeMove, requestID, isMove = false;;
 
     var getType = function(element, nameType) {
         var type = Object.prototype.toString.call(element).slice(8, -1);
@@ -45,7 +73,7 @@
                     percent: newTopText / diffTextBoxes * 100
                 }, directionMove);
             }
-            
+
         },
         horizontal: function($wrap, $text, $minText, $scrollArea, $scroll, callback) {
             var originalScrollLeft = parseInt($scroll.css('left')),
@@ -67,13 +95,17 @@
 
             var newLeftText = diffTextBoxes / diffScrollBoxes * newScrollLeft;
             $text.css('left', -newLeftText);
-            callback.call($wrap, {
-                pixel: newScrollLeft,
-                percent: newScrollLeft / maxScrollLeft * 100
-            }, {
-                pixel: 0 - newLeftText,
-                percent: newLeftText / diffTextBoxes * 100
-            });
+
+            if (callback) {
+                callback.call($wrap, {
+                    pixel: newScrollLeft,
+                    percent: newScrollLeft / maxScrollLeft * 100
+                }, {
+                    pixel: 0 - newLeftText,
+                    percent: newLeftText / diffTextBoxes * 100
+                });
+            }
+
         }
     };
 
@@ -142,104 +174,147 @@
                     }
                 },
                 vertical: function() {
+
+                    var loop, step;
+
                     $wrap.on('mousewheel MozMousePixelScroll', function(event) {
-                        var step = ($scrollArea.height() - $scroll.height()) / ($text.outerHeight(true) / $minText.outerHeight(true) * 10);
+                        typeMove = 'mousewheel';
+                        isMove = true;
 
-                        if (step < 1) {
-                            step = 1
-                        };
-
-                        if (event.type === 'mousewheel') {     
-                                               
+                        if (event.type === 'mousewheel') {
                             if (event.originalEvent.wheelDelta >= 0) {
                                 directionMove = 'up'
                             } else {
                                 directionMove = 'down'
                             }
-
-                            $scroll.css('top', event.originalEvent.wheelDelta >= 0 ? '-=' + step : '+=' + step);
                         } else {
-
                             if (event.originalEvent.detail <= 0) {
                                 directionMove = 'up'
                             } else {
                                 directionMove = 'down'
                             }
+                        }
+                    })
 
-                            $scroll.css('top', event.originalEvent.detail <= 0 ? '-=' + step : '+=' + step);
-                        };
+                    $wrap.hover(function() {
+                        loop = (function loop() {
+                            requestID = requestAnimationFrame(loop);
 
-                        setEvents.go[direction]();
+                            if (!isMove) return;
+                            isMove = false;
 
-                        event.preventDefault();
+                            if (typeMove === 'mousewheel') {
+                                step = ($scrollArea.height() - $scroll.height()) / ($text.outerHeight(true) / $minText.outerHeight(true) * 10);
+
+                                if (step < 1) {
+                                    step = 1
+                                };
+
+                                step = ((directionMove === 'up') ? '-=' : '+=') + step;
+                            };
+
+                            $scroll.css('top', step);
+                            setEvents.go[direction]();
+
+                        }());
+                    }, function() {
+                        cancelAnimationFrame(requestID);
+                        requestID = undefined;
                     });
 
-                    $scroll.on('mousedown', function(event) {
+                    $scroll.mousedown(function(event) {
+                        typeMove = 'mousedown';
+
                         var originalScrollTop = event.pageY - parseInt($(this).css('top') || 0);
 
                         $(document.body).on('mousemove.iScroll', function(event) {
+                            isMove = true;
+
                             if ((event.pageY - originalScrollTop) - parseInt($scroll.css('top')) > 0) {
                                 directionMove = 'down'
                             } else {
                                 directionMove = 'up'
                             };
 
-                            $scroll.css('top', event.pageY - originalScrollTop);
-                            setEvents.go[direction]();
+                            step = event.pageY - originalScrollTop;
                         });
 
                         return false;
+                    }).mouseup(function() {
+                        typeMove = null;
                     });
 
                     return this;
                 },
                 horizontal: function() {
 
-                    $wrap.on('mousewheel MozMousePixelScroll', function(event) {
-                        var step = ($scrollArea.width() - $scroll.width()) / ($text.outerWidth(true) / $minText.outerWidth(true) * 10);
+                    var loop, step;
 
-                        if (step < 1) {
-                            step = 1
-                        };
+                    $wrap.on('mousewheel MozMousePixelScroll', function(event) {
+                        typeMove = 'mousewheel';
+                        isMove = true;
 
                         if (event.type === 'mousewheel') {
                             if (event.originalEvent.wheelDelta >= 0) {
                                 directionMove = 'right'
                             } else {
                                 directionMove = 'left'
-                            };
-
-                            $scroll.css('left', event.originalEvent.wheelDelta >= 0 ? '-=' + step : '+=' + step);
+                            }
                         } else {
                             if (event.originalEvent.detail <= 0) {
                                 directionMove = 'right'
                             } else {
                                 directionMove = 'left'
+                            }
+                        }
+                    })
+
+                    $wrap.hover(function() {
+                        loop = (function loop() {
+                            requestID = requestAnimationFrame(loop);
+
+                            if (!isMove) return;
+                            isMove = false;
+
+                            if (typeMove === 'mousewheel') {
+                                step = ($scrollArea.width() - $scroll.width()) / ($text.outerWidth(true) / $minText.outerWidth(true) * 10);
+
+                                if (step < 1) {
+                                    step = 1
+                                };
+
+                                step = (/up|right/.test(directionMove) ? '-=' : '+=') + step;
                             };
 
-                            $scroll.css('left', event.originalEvent.detail <= 0 ? '-=' + step : '+=' + step);
-                        };
+                            $scroll.css('left', step);
+                            setEvents.go[direction]();
 
-                        setEvents.go[direction]();
-
-                        event.preventDefault();
+                        }());
+                    }, function() {
+                        cancelAnimationFrame(requestID);
+                        requestID = undefined;
                     });
 
-                    $scroll.on('mousedown', function(event) {
+                    $scroll.mousedown(function(event) {
+                        typeMove = 'mousedown';
+
                         var originalScrollLeft = event.pageX - parseInt($(this).css('left') || 0);
 
                         $(document.body).on('mousemove.iScroll', function(event) {
+                            isMove = true;
+
                             if ((event.pageX - originalScrollLeft) - parseInt($scroll.css('left')) > 0) {
                                 directionMove = 'right'
                             } else {
                                 directionMove = 'left'
-                            }
+                            };
 
-                            $scroll.css('left', event.pageX - originalScrollLeft);
-                            setEvents.go[direction]();
+                            step = event.pageX - originalScrollLeft;
                         });
 
                         return false;
+                    }).mouseup(function() {
+                        typeMove = null;
                     });
 
                     return this;
@@ -273,7 +348,7 @@
         iScrollTop: function(_selector, _needAnimate, _callback) {
 
             var selector = _selector,
-                needAnimate = true, 
+                needAnimate = true,
                 callback;
 
             if (getType(_needAnimate, 'Boolean').isValid) {
@@ -367,7 +442,7 @@
                 });
             }
 
-            
+
 
             return $(this);
         }

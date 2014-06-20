@@ -9,3 +9,7 @@ $('.wrap').iScroll(function(positionScroll, positionText, directionMove) {
     $text.find('ul').append($('<li>add_'+(count++)+': Lorem ipsum dolor sitr autem.</li>'))
   }
 });
+
+$('.wrap-h').iScroll({
+  direction: 'horizontal'
+})
